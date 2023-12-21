@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part "calculatorState.dart";
@@ -6,7 +8,7 @@ class CalculatorCubit extends Cubit<CalculatorTextState>{
 
   String text = "";
 
-  CalculatorCubit() : super(CalculatorTextState(text: ""));
+  CalculatorCubit() : super(CalculatorTextState(text: " "));
 
   void signsButton(String sign){
     text = text + sign;
@@ -73,71 +75,209 @@ class CalculatorCubit extends Cubit<CalculatorTextState>{
     emit(CalculatorTextState(text: text.trim()));
   }
 
-  num multiply(num leftOp, num rightOp) => leftOp * rightOp;
-  num divide(num leftOp, num rightOp) => leftOp / rightOp;
-  num add(num leftOp, num rightOp) => leftOp + rightOp;
-  num substract(num leftOp, num rightOp) => leftOp - rightOp;
 
-  void compute1() {
 
-    List<dynamic> items = [];
-    for(int i=0; i<text.length; i++){
+  int dmas(String str){
+    List<double> operands = [];
+    String numbers = "";
+    bool check = false;
+    for(int i=0; i<str.trim().length; i++){
+        try{
+          int num = int.parse(str.trim().substring(i, i+1));
+          numbers=numbers+num.toString();
+          try{
+            int num2 = int.parse(str.trim().substring(i+1, i+2));
+            check=true;
+          }catch(e){
+            check=false;
+          }
+          if(check==true){
+
+          }
+          else{
+            operands.add(double.parse(numbers));
+            List<double> l1 = operands;
+            numbers="";
+          }
+        }
+        catch(e){}
+    }
+    List<String> operators=[];
+    for(int i=0; i<str.trim().length; i++){
       try{
-        String num = text.substring(i, i+1);
-        items.add(num.toString());
+        if(str.trim().substring(i, i+1)=="+" || str.trim().substring(i, i+1)=="-"
+            || str.trim().substring(i, i+1)=="*" || str.trim().substring(i, i+1)=="/"){
+          operators.add(str.trim().substring(i, i+1));
+        }
       }
       catch(e){}
-    }//correct is 10
+    }
 
-    num result = 0;
-
-    // Copy the list in a temporary list
-    var calc = [...items];
-
-    // set the precedence order of the operators
-    // create 2 groups of equal importance
-    var operators = [
-      {
-        "*": multiply,
-        "/": divide,
-      },
-      {
-        "+": add,
-        "-": substract,
+    for(int i=0; i<operators.length; i++){
+      if(operators[i]=='/'){
+        double result = operands[i]/operands[i+1];
+        operands.remove(i);
+        operands.remove(i);
+        operands.insertAll(i, [result]);
+        operators.remove(i);
       }
-    ];
+    }
+    for(int i=0; i<operators.length; i++){
+      if(operators[i]=='*'){
+        double result = operands[i]*operands[i+1];
+        operands.remove(i);
+        operands.remove(i);
+        operands.insertAll(i, [result]);
+        operators.remove(i);
+      }
+    }
+    for(int i=0; i<operators.length; i++){
+      if(operators[i]=='+'){
+        double result = operands[i]+operands[i+1];
+        operands.remove(i);
+        operands.remove(i);
+        operands.insertAll(i, [result]);
+        operators.remove(i);
+      }
+    }
+    for(int i=0; i<operators.length; i++){
+      if(operators[i]=='-'){
+        double result = operands[i]-operands[i+1];
+        operands.remove(i);
+        operands.remove(i);
+        operands.insertAll(i, [result]);
+        operators.remove(i);
+      }
+    }
+    return operands[0].toInt();
+  }
 
-    // loop until all operators have produced result
-    while (calc.length > 1) {
-      for (var opPrecedence in operators) {
-        // find first operator in a group, starting from left
+  void bodmas(){
+    bool leftbrac = false;
+    bool rightbrac = false;
+    int idx1 = -1;
+    int idx2 = -1;
 
-        var pos = 0;
-
-        do {
-          pos = calc.indexWhere((e) => opPrecedence.containsKey(e));
-
-          if (pos >= 0) {
-            num leftOp = calc[pos - 1];
-            num rightOp = calc[pos + 1];
-
-            var operation = opPrecedence[calc[pos]];
-
-            result = operation!(leftOp, rightOp);
-
-            // remove the 2 operands and replace with result
-            calc.removeAt(pos);
-            calc.removeAt(pos);
-            calc[pos - 1] = result;
+    while(text.trim().contains("(")){
+      for(int i=0; i<text.trim().length; i++){
+        if(leftbrac==false) {
+          if (text[i] == "(") {
+            leftbrac = true;
+            idx1 = i;
           }
-        } while (pos >= 0);
+        }
+        if(rightbrac==false){
+          if(text[i]==")"){
+            rightbrac = true;
+            idx2=i;
+          }
+        }
+        if(rightbrac==true && leftbrac==true){
+          int result = dmas(text.trim().substring(idx1+1, idx2)) ;
+          text = text.replaceRange(idx1, idx2+1, result.toString());
+          String t = text;
+          idx1=-1;
+          idx2=-1;
+          leftbrac=false;
+          rightbrac=false;
+        }
+      }
+    }
+    List<double> operands = [];
+    String numbers = "";
+    bool check = false;
+    for(int i=0; i<text.trim().length; i++){
+        try{
+          int num = int.parse(text.trim().substring(i, i+1));
+          numbers=numbers+num.toString();
+          try{
+            int num2 = int.parse(text.trim().substring(i+1, i+2));
+            check=true;
+          }catch(e){
+            check=false;
+          }
+          if(check==true){
+
+          }
+          else{
+            operands.add(double.parse(numbers));
+            List<double> l1 = operands;
+            numbers="";
+          }
+        }
+        catch(e){}
+    }
+    List<String> operators=[];
+    for(int i=0; i<text.trim().length; i++){
+      try{
+        if(text.trim().substring(i, i+1)=="+" || text.trim().substring(i, i+1)=="-"
+            || text.trim().substring(i, i+1)=="*" || text.trim().substring(i, i+1)=="/"){
+          operators.add(text.trim().substring(i, i+1));
+        }
+      }
+      catch(e){}
+    }
+
+    while(operators.contains("/")){
+      for(int i=0; i<operators.length; i++){
+        if(operators[i]=='/'){
+          double result = operands[i]/operands[i+1];
+          operands.removeAt(i);
+          operands.removeAt(i);
+          operands.insertAll(i, [result]);
+          operators.removeAt(i);
+        }
       }
     }
 
-    // what should be left is the final result
-    emit(CalculatorTextState(text: result.toString()));
+    while(operators.contains("*")){
+      for(int i=0; i<operators.length; i++){
+        if(operators[i]=='*'){
+          double result = operands[i]*operands[i+1];
+          operands.removeAt(i);
+          operands.removeAt(i);
+          operands.insertAll(i, [result]);
+          operators.removeAt(i);
+        }
+      }
+    }
+
+    while(operators.contains("+")) {
+      for (int i = 0; i < operators.length; i++) {
+        if (operators[i] == '+') {
+          double result = operands[i] + operands[i + 1];
+          operands.removeAt(i);
+          List<double> l = operands;
+          operands.removeAt(i);
+          List<double> l1 = operands;
+          operands.insertAll(i, [result]);
+          List<double> l3 = operands;
+          operators.removeAt(i);
+          List<String> l2 = operators;
+        }
+      }
+      // List<double> finals = operands;
+    }
+
+    List<double> list = operands;
+    List<String> list1 = operators;
+
+    while(operators.contains("-")){
+      for(int i=0; i<operators.length; i++){
+        if(operators[i]=='-'){
+          double result = operands[i]-operands[i+1];
+          operands.removeAt(i);
+          operands.removeAt(i);
+          operands.insertAll(i, [result]);
+          operators.removeAt(i);
+
+        }
+      }
+    }
+
+    String answer = text+"\n"+operands[0].toString();
+    String final_ans=answer.trim();
+    emit(CalculatorTextState(text: final_ans));
+
   }
-
-
-
 }
