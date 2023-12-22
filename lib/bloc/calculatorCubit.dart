@@ -8,21 +8,21 @@ class CalculatorCubit extends Cubit<CalculatorTextState>{
 
   String text = "";
 
-  CalculatorCubit() : super(CalculatorTextState(text: " "));
+  CalculatorCubit() : super(CalculatorTextState(text: " ", text1: " ", textColor:  0xFFFFFFFF));
 
   void signsButton(String sign){
     text = text + sign;
-    emit(CalculatorTextState(text: text.trim()));
+    emit(CalculatorTextState(text: " ", text1: text.trim(), textColor:  0xFFFFFFFF));
   }
 
   void backspace(){
     text = text.substring(0, text.length-1);
-    emit(CalculatorTextState(text: text.trim()));
+    emit(CalculatorTextState(text: " ", text1: text.trim(), textColor:  0xFFFFFFFF));
   }
 
   void reset(){
     text = "";
-    emit(CalculatorTextState(text: ""));
+    emit(CalculatorTextState(text: " ", text1: " ", textColor:  0xFFFFFFFF));
   }
 
   void compute(){
@@ -67,12 +67,12 @@ class CalculatorCubit extends Cubit<CalculatorTextState>{
       o++;
     }
     text=aggregate.toString();
-    emit(CalculatorTextState(text: text));
+    // emit(CalculatorTextState(text: text));
   }
 
   void numButton(int num){
     text = text + num.toString();
-    emit(CalculatorTextState(text: text.trim()));
+    emit(CalculatorTextState(text: " ", text1: text.trim(), textColor:  0xFFFFFFFF));
   }
 
 
@@ -275,9 +275,7 @@ class CalculatorCubit extends Cubit<CalculatorTextState>{
       }
     }
 
-    String answer = text+"\n"+operands[0].toString();
-    String final_ans=answer.trim();
-    emit(CalculatorTextState(text: final_ans));
+    emit(CalculatorTextState(text: text, text1: operands[0].toString().trim(), textColor: 0xFF69F0AE));
 
   }
 }
