@@ -1,5 +1,4 @@
 import 'package:calculator/bloc/calculatorCubit.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -31,18 +30,18 @@ class FourthScreen extends StatelessWidget{
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Align(alignment: Alignment.bottomRight,
-                                child: Text(textState.text.trimRight()+" ", style: TextStyle(fontSize: 50, color: Colors.white))),
-                            SizedBox(height: 5,),
+                                child: Text("${textState.text.trimRight()} ", style: const TextStyle(fontSize: 50, color: Colors.white))),
+                            const SizedBox(height: 5,),
                             Align(alignment: Alignment.bottomRight,
-                                child: Text(textState.text1.trim() +" ", style: TextStyle(fontSize: 50, color: Color(textState.textColor))))
+                                child: Text("${textState.text1.trim()} ", style: TextStyle(fontSize: 50, color: Color(textState.textColor))))
                           ],
                         ),
                       )
                   )
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     border: Border(top: BorderSide(width: 2, color: Colors.black))
                 ),
                 width: double.maxFinite,
@@ -72,8 +71,8 @@ class FourthScreen extends StatelessWidget{
                                 color: Colors.white,
                                 shadowLightColor: Colors.black.withGreen(20),
                                 shape: NeumorphicShape.convex, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(50)),),
-                              padding: EdgeInsets.all(12.0),
-                              child: Align(
+                              padding: const EdgeInsets.all(12.0),
+                              child: const Align(
                                 alignment: Alignment.center,
                                 child: Text("AC", style: TextStyle(fontWeight: FontWeight.bold,
                                     fontSize: 24, color: Colors.black),),
@@ -91,7 +90,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.lightBlue),
-                              child: Text('(', style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text('(', style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.white))),
                         ),
                         SizedBox(
@@ -105,7 +104,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.lightBlue),
-                              child: Text(")", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text(")", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.white))),
                         ),
                         SizedBox(
@@ -119,12 +118,12 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.lightBlue),
-                              child: Text("/", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("/", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.white))),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -140,7 +139,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("7", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("7", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -154,7 +153,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text('8', style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text('8', style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -168,7 +167,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("9", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("9", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -184,13 +183,13 @@ class FourthScreen extends StatelessWidget{
                                   backgroundColor: Colors.lightBlue),
                               child: Container(
                                 alignment: Alignment.bottomCenter,
-                                child: Text("*", style: TextStyle(fontWeight: FontWeight.bold,
+                                child: const Text("*", style: TextStyle(fontWeight: FontWeight.bold,
                                     fontSize: 40, color: Colors.white)),
                               )),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -206,7 +205,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("4", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("4", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -220,7 +219,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text('5', style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text('5', style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -234,7 +233,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("6", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("6", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -248,11 +247,11 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.lightBlue),
-                              child: Text("-", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("-", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 46, color: Colors.white))),
                         ),              ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -268,7 +267,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text('1', style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text('1', style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -282,7 +281,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("2", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("2", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -296,7 +295,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("3", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("3", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
                         SizedBox(
@@ -310,12 +309,12 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.lightBlue),
-                              child: Text("+", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("+", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 35, color: Colors.white))),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -331,7 +330,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text('0', style: TextStyle(
+                              child: const Text('0', style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24, color: Colors.black))),
                         ),
@@ -346,7 +345,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text(".", style: TextStyle(
+                              child: const Text(".", style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 46, color: Colors.black))),
                         ),
@@ -361,7 +360,7 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.white),
-                              child: Text("<-", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("<-", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 30, color: Colors.black))),
                         ),
                         SizedBox(
@@ -375,12 +374,12 @@ class FourthScreen extends StatelessWidget{
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                   backgroundColor: Colors.lightBlueAccent),
-                              child: Text("=", style: TextStyle(fontWeight: FontWeight.bold,
+                              child: const Text("=", style: TextStyle(fontWeight: FontWeight.bold,
                                   fontSize: 46, color: Colors.white))),
                         ),
                       ],
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                   ],
                 ),
               )
